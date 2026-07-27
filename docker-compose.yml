@@ -1,0 +1,52 @@
+# Smart News Aggregator — Web UI
+#
+#   Production-style:  docker compose up --build web        -> http://localhost:8080
+#   Hot reload:        docker compose --profile dev up dev  -> http://localhost:5173
+#
+# Django is NOT containerised in this project — it runs natively in the venv on
+# the host, and Postgres is a standalone container (`news-scrapper`, host port
+# 5433). So both services below reach the API through host.docker.internal.
+# If you later containerise Django, replace that host with its service name.
+
+services:
+  web:
+    build:
+      context: .
+      target: runtime
+      args:
+        # Baked into the bundle at build time. /api keeps calls same-origin so
+        # nginx proxies them and CORS never applies.
+        VITE_API_BASE_URL: /api
+    image: smart-news-aggregator-ui:latest
+    ports:
+      - '8080:8080'
+    environment:
+      # Runtime-configurable, unlike VITE_*. This is where nginx sends /api.
+      API_PROXY_TARGET: ${API_PROXY_TARGET:-http://host.docker.internal:8000}
+    extra_hosts:
+      # Docker Desktop provides host.docker.internal automatically; Linux does
+      # not. This line makes the same compose file work on both.
+      - 'host.docker.internal:host-gateway'
+    restart: unless-stopped
+
+  dev:
+    profiles: ['dev']
+    build:
+      context: .
+      target: dev
+    ports:
+      - '5173:5173'
+    volumes:
+      # Source is bind-mounted for hot reload. The anonymous volume on
+      # node_modules stops the host's copy from shadowing the image's — they are
+      # built for different platforms and swapping them breaks native binaries.
+      - .:/app
+      - /app/node_modules
+    environment:
+      # Same arrangement as running Vite on the host: the browser calls /api on
+      # the dev server, which proxies to Django. Only the target changes, since
+      # from inside the container 127.0.0.1 is the container itself.
+      VITE_API_BASE_URL: /api
+      VITE_PROXY_TARGET: ${VITE_PROXY_TARGET:-http://host.docker.internal:8000}
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

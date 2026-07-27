@@ -1,0 +1,30 @@
+# Keep the build context small and the image reproducible.
+node_modules
+dist
+coverage
+.git
+.gitignore
+
+# Secrets and local overrides — never bake these into an image.
+# VITE_* values are compiled into the bundle and are public by definition;
+# the build takes them as --build-arg instead.
+.env
+.env.local
+.env.*.local
+
+# Docs and design assets: not build inputs.
+.CLAUDE
+design
+README.md
+
+# Docker's own files.
+# NOT nginx/ — the runtime stage COPYs the config template out of it.
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Editor / OS noise
+.vscode
+.idea
+.DS_Store
+*.log
