@@ -1,0 +1,272 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Smart News Aggregator - Category Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed": "#d9e3f4",
+                        "primary": "#002045",
+                        "surface-container-highest": "#e7e2da",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#bdc7d7",
+                        "surface-dim": "#dfd9d1",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#adc7f7",
+                        "tertiary-container": "#003d38",
+                        "on-surface-variant": "#43474e",
+                        "outline": "#74777f",
+                        "on-surface": "#1d1b17",
+                        "tertiary-fixed-dim": "#80d5cb",
+                        "surface-container-low": "#f9f3eb",
+                        "on-secondary-fixed": "#121c28",
+                        "inverse-surface": "#32302b",
+                        "tertiary-fixed": "#9cf2e8",
+                        "surface-tint": "#455f88",
+                        "primary-container": "#1a365d",
+                        "surface": "#fef9f0",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fef9f0",
+                        "secondary-container": "#d9e3f4",
+                        "outline-variant": "#c4c6cf",
+                        "inverse-on-surface": "#f6f0e8",
+                        "on-tertiary-container": "#56ada3",
+                        "error": "#ba1a1a",
+                        "secondary": "#555f6d",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#f3ede5",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#3e4855",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-tertiary-fixed": "#00201d",
+                        "surface-variant": "#e7e2da",
+                        "surface-container-high": "#ede7df",
+                        "primary-fixed": "#d6e3ff",
+                        "on-primary-fixed": "#001b3c",
+                        "primary-fixed-dim": "#adc7f7",
+                        "on-error": "#ffffff",
+                        "background": "#fef9f0",
+                        "tertiary": "#002522",
+                        "on-secondary-container": "#5b6573",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "on-primary-container": "#86a0cd",
+                        "on-background": "#1d1b17"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin": "24px",
+                        "container-max": "1200px",
+                        "tight": "4px",
+                        "rail-width": "260px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-md": ["Newsreader"],
+                        "headline-sm": ["Newsreader"],
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-md": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #FBFAF8; }
+        .hairline-border { border-color: #E7E3DC; }
+        .ink-muted { color: #6A6E76; }
+        .accent-indigo { border-left-color: #4F46E5; }
+        .text-indigo { color: #4F46E5; }
+        .bg-indigo-tint { background-color: rgba(79, 70, 229, 0.1); }
+    </style>
+</head>
+<body class="font-body text-[#14181F] min-h-screen flex flex-col">
+<!-- TopAppBar from JSON -->
+<header class="bg-[#FBFAF8] dark:bg-[#14181F] bg-opacity-90 backdrop-blur-sm fixed top-0 w-full z-50 border-b border-[#E7E3DC] dark:border-[#5A6472] shadow-sm">
+<div class="flex justify-between items-center px-8 h-16 max-w-[1200px] mx-auto">
+<div class="flex items-center gap-8">
+<a class="font-headline text-2xl font-bold text-[#14181F] dark:text-[#FBFAF8] scale-101 transition-transform duration-160 ease-out" href="#">Smart News</a>
+<nav class="hidden md:flex items-center gap-6 font-body text-sm font-semibold tracking-tight">
+<a class="text-[#5A6472] hover:text-[#14181F] hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">Latest</a>
+<a class="text-[#1A365D] border-b-2 border-[#1A365D] pb-1 px-2" href="#">Tech</a>
+<a class="text-[#5A6472] hover:text-[#14181F] hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">World</a>
+<a class="text-[#5A6472] hover:text-[#14181F] hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">Business</a>
+<a class="text-[#5A6472] hover:text-[#14181F] hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">Sports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#5A6472] text-sm">search</span>
+<input class="w-[280px] h-10 pl-9 pr-12 rounded-full border border-[#949089] bg-transparent text-sm focus:ring-2 focus:ring-[#1A365D]/20 focus:border-[#1A365D] outline-none" placeholder="Search..." type="text">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-[#5A6472] border border-[#E7E3DC] rounded px-1.5 py-0.5">Cmd-K</span>
+</div>
+<button class="p-2 text-[#5A6472] hover:bg-[#F4F2EE] rounded-full transition-colors duration-160"><span class="material-symbols-outlined text-xl">settings</span></button>
+<button class="p-2 text-[#5A6472] hover:bg-[#F4F2EE] rounded-full transition-colors duration-160"><span class="material-symbols-outlined text-xl">notifications</span></button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-12 px-margin lg:px-8 max-w-container-max mx-auto w-full flex gap-gutter">
+<!-- Filter Rail -->
+<aside class="hidden lg:flex flex-col p-5 bg-[#F4F2EE] dark:bg-[#14181F] sticky top-24 w-rail-width h-[calc(100vh-120px)] rounded-lg overflow-y-auto shrink-0">
+<!-- Categories -->
+<div class="mb-6">
+<h3 class="font-label text-[11px] uppercase tracking-[0.08em] font-bold text-[#14181F] mb-3">CATEGORIES</h3>
+<div class="space-y-2">
+<label class="flex items-center justify-between text-sm cursor-pointer group">
+<div class="flex items-center gap-2 text-[#5A6472] group-hover:text-[#14181F]">
+<input class="text-[#1A365D] focus:ring-[#1A365D]" name="category" type="radio">
+<span>All</span>
+</div>
+<span class="text-xs ink-muted">478</span>
+</label>
+<label class="flex items-center justify-between text-sm cursor-pointer group bg-indigo-tint px-2 py-1.5 rounded -mx-2">
+<div class="flex items-center gap-2 text-indigo font-medium">
+<input checked="" class="text-indigo focus:ring-indigo" name="category" type="radio">
+<span>Tech</span>
+</div>
+<span class="text-xs text-indigo">70</span>
+</label>
+<label class="flex items-center justify-between text-sm cursor-pointer group">
+<div class="flex items-center gap-2 text-[#5A6472] group-hover:text-[#14181F]">
+<input class="text-[#1A365D] focus:ring-[#1A365D]" name="category" type="radio">
+<span>World</span>
+</div>
+<span class="text-xs ink-muted">116</span>
+</label>
+</div>
+</div>
+<hr class="border-[#E7E3DC] mb-6">
+<!-- Sources -->
+<div class="mb-6">
+<h3 class="font-label text-[11px] uppercase tracking-[0.08em] font-bold text-[#14181F] mb-3">SOURCES</h3>
+<div class="space-y-3">
+<label class="flex items-center justify-between text-sm cursor-pointer group">
+<div class="flex items-center gap-3 text-[#14181F]">
+<input checked="" class="rounded border-[#949089] text-[#1A365D] focus:ring-[#1A365D]" type="checkbox">
+<div class="w-7 h-7 rounded bg-indigo-tint text-indigo flex items-center justify-center font-bold text-xs">TV</div>
+<span>The Verge</span>
+</div>
+<span class="text-xs ink-muted">24</span>
+</label>
+<label class="flex items-center justify-between text-sm cursor-pointer group">
+<div class="flex items-center gap-3 text-[#14181F]">
+<input checked="" class="rounded border-[#949089] text-[#1A365D] focus:ring-[#1A365D]" type="checkbox">
+<div class="w-7 h-7 rounded bg-indigo-tint text-indigo flex items-center justify-center font-bold text-xs">AT</div>
+<span>Ars Technica</span>
+</div>
+<span class="text-xs ink-muted">18</span>
+</label>
+</div>
+<button class="mt-4 text-xs font-medium text-[#5A6472] hover:text-[#14181F] hover:bg-[#E7E3DC] px-2 py-1 rounded transition-colors -ml-2">Show all 14 sources</button>
+</div>
+</aside>
+<!-- Main Content -->
+<div class="flex-grow min-w-0">
+<!-- Header Area -->
+<div class="mb-8">
+<h1 class="font-headline text-[32px] leading-tight font-semibold text-[#14181F] mb-1">Tech</h1>
+<p class="text-[13px] ink-muted">42 stories from 2 sources, last 24 hours</p>
+<!-- Filter Chips -->
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-white border border-[#E7E3DC] rounded-full text-xs font-medium text-[#14181F] shadow-sm hover:border-[#D6D1C7] cursor-pointer transition-colors">
+                        Tech <span class="material-symbols-outlined text-[14px] ink-muted hover:text-[#14181F]">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-white border border-[#E7E3DC] rounded-full text-xs font-medium text-[#14181F] shadow-sm hover:border-[#D6D1C7] cursor-pointer transition-colors">
+                        The Verge <span class="material-symbols-outlined text-[14px] ink-muted hover:text-[#14181F]">close</span>
+</span>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+<!-- Article Card 1 -->
+<article class="bg-white rounded-lg border border-[#E7E3DC] border-l-[3px] accent-indigo p-5 shadow-[0_1px_2px_rgba(20,24,31,0.04)] hover:shadow-[0_6px_16px_-4px_rgba(20,24,31,0.10)] hover:border-[#D6D1C7] hover:border-l-[#4F46E5] hover:-translate-y-[2px] transition-all duration-200 flex flex-col h-full">
+<div class="flex items-center gap-1 text-[11px] font-bold tracking-widest uppercase ink-muted mb-2 font-label">
+<span class="text-indigo">TECH</span>
+<span>·</span>
+<span>THE VERGE</span>
+<span>·</span>
+<span>34M</span>
+</div>
+<h2 class="font-headline text-xl font-semibold leading-[1.4] text-[#14181F] mb-3 flex-grow">Apple foldable iPhone enters final testing as suppliers ramp panel production</h2>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-[#F4F2EE]">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-indigo-tint text-indigo flex items-center justify-center font-bold text-[10px]">TV</div>
+<span class="text-xs font-medium text-[#5A6472]">Alex Heath</span>
+</div>
+<div class="flex gap-1">
+<button class="p-1.5 text-[#5A6472] hover:bg-[#F4F2EE] rounded transition-colors"><span class="material-symbols-outlined text-[18px]">bookmark</span></button>
+<button class="p-1.5 text-[#5A6472] hover:bg-[#F4F2EE] rounded transition-colors"><span class="material-symbols-outlined text-[18px]">open_in_new</span></button>
+</div>
+</div>
+</article>
+<!-- Article Card 2 -->
+<article class="bg-white rounded-lg border border-[#E7E3DC] border-l-[3px] accent-indigo p-5 shadow-[0_1px_2px_rgba(20,24,31,0.04)] hover:shadow-[0_6px_16px_-4px_rgba(20,24,31,0.10)] hover:border-[#D6D1C7] hover:border-l-[#4F46E5] hover:-translate-y-[2px] transition-all duration-200 flex flex-col h-full">
+<div class="flex items-center gap-1 text-[11px] font-bold tracking-widest uppercase ink-muted mb-2 font-label">
+<span class="text-indigo">TECH</span>
+<span>·</span>
+<span>ARS TECHNICA</span>
+<span>·</span>
+<span>1H</span>
+</div>
+<h2 class="font-headline text-xl font-semibold leading-[1.4] text-[#14181F] mb-3 flex-grow">New Linux kernel patch cuts scheduler latency by 40 percent</h2>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-[#F4F2EE]">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-indigo-tint text-indigo flex items-center justify-center font-bold text-[10px]">AT</div>
+<span class="text-xs font-medium text-[#5A6472]">Ron Amadeo</span>
+</div>
+<div class="flex gap-1">
+<button class="p-1.5 text-[#5A6472] hover:bg-[#F4F2EE] rounded transition-colors"><span class="material-symbols-outlined text-[18px]">bookmark</span></button>
+<button class="p-1.5 text-[#5A6472] hover:bg-[#F4F2EE] rounded transition-colors"><span class="material-symbols-outlined text-[18px]">open_in_new</span></button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="flex flex-col items-center justify-center pb-8">
+<button class="bg-white border border-[#D6D1C7] text-[#14181F] px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-[#F4F2EE] transition-colors mb-4 shadow-sm">Load more stories</button>
+<div class="w-64">
+<div class="text-xs text-center ink-muted mb-2">Showing 6 of 42 stories</div>
+<div class="w-full h-1 bg-[#E7E3DC] rounded-full overflow-hidden">
+<div class="h-full bg-[#1A365D] w-[14%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Empty State Section (demonstration) -->
+<div class="mt-16 border-t border-[#E7E3DC] pt-16">
+<h3 class="text-sm font-bold text-[#5A6472] mb-8 uppercase tracking-wider text-center">Empty State - Over-filtered</h3>
+<div class="max-w-[420px] mx-auto text-center bg-white p-8 rounded-xl border border-[#E7E3DC] shadow-sm">
+<div class="w-16 h-16 rounded-full bg-[#1A365D]/10 text-[#1A365D] flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 0;">filter_alt</span>
+</div>
+<h2 class="font-headline text-2xl font-semibold text-[#14181F] mb-3 leading-tight">No Tech stories from ESPN in the last 24 hours</h2>
+<p class="text-[#5A6472] text-sm mb-6 leading-relaxed">Try adjusting your source or time filters to see more results.</p>
+<button class="bg-[#1A365D] text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:scale-101 transition-transform">Clear source filter</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

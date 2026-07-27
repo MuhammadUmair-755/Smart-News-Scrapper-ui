@@ -1,0 +1,473 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Smart News Aggregator - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        canvas: "#FBFAF8",
+                        surface: "#FFFFFF",
+                        "surface-sunken": "#F4F2EE",
+                        "border-hairline": "#E7E3DC",
+                        "border-strong": "#D6D1C7",
+                        "ink-primary": "#14181F",
+                        "ink-secondary": "#5A6472",
+                        "ink-muted": "#8A8F99",
+                        "brand-primary": "#1A365D",
+                        "brand-hover": "#132A48",
+                        "brand-tint": "#EEF2F7",
+                        
+                        "tech": "#4F46E5",
+                        "tech-tint": "#EEF0FE",
+                        "world": "#0F766E",
+                        "world-tint": "#E8F4F2",
+                        "business": "#B45309",
+                        "business-tint": "#FDF2E3",
+                        "sports": "#BE123C",
+                        "sports-tint": "#FCE9EE",
+                        
+                        "success": "#15803D",
+                        "success-tint": "#E8F5EC",
+                        "warning": "#B45309",
+                        "warning-tint": "#FDF2E3",
+                        "danger": "#B42318",
+                        "danger-tint": "#FDECEA",
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "display": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'rest': '0 1px 2px rgba(20,24,31,0.04)',
+                        'hover': '0 6px 16px -4px rgba(20,24,31,0.10)',
+                        'overlay': '0 24px 48px -12px rgba(20,24,31,0.22)'
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.canvas');
+            color: theme('colors.ink-primary');
+            font-family: theme('fontFamily.body');
+        }
+        
+        .label-sm {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .middot::before {
+            content: "·";
+            margin: 0 8px;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, #EFECE7 0%, #F8F6F3 50%, #EFECE7 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(21, 128, 61, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(21, 128, 61, 0); }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#FBFAF8] dark:bg-[#14181F] bg-opacity-90 backdrop-blur-sm fixed top-0 w-full z-50 border-b border-[#E7E3DC] dark:border-[#5A6472] shadow-sm flex justify-between items-center px-8 h-16 transition-colors duration-200">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 bg-brand-primary rounded-sm"></div>
+<span class="font-headline text-2xl font-bold text-[#14181F] dark:text-[#FBFAF8]">Aggregator</span>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-body text-sm font-semibold tracking-tight text-[#1A365D] border-b-2 border-[#1A365D] pb-1" href="#">Latest</a>
+<a class="font-body text-sm font-semibold tracking-tight text-[#5A6472] hover:text-[#14181F] transition-colors duration-160 hover:bg-[#F4F2EE] px-2 py-1 rounded" href="#">Tech</a>
+<a class="font-body text-sm font-semibold tracking-tight text-[#5A6472] hover:text-[#14181F] transition-colors duration-160 hover:bg-[#F4F2EE] px-2 py-1 rounded" href="#">World</a>
+<a class="font-body text-sm font-semibold tracking-tight text-[#5A6472] hover:text-[#14181F] transition-colors duration-160 hover:bg-[#F4F2EE] px-2 py-1 rounded" href="#">Business</a>
+<a class="font-body text-sm font-semibold tracking-tight text-[#5A6472] hover:text-[#14181F] transition-colors duration-160 hover:bg-[#F4F2EE] px-2 py-1 rounded" href="#">Sports</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-72 hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-12 bg-surface border-border-hairline rounded-lg text-sm text-ink-primary placeholder-ink-muted focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all" placeholder="Search 478 stories" type="text">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-ink-muted border border-border-hairline rounded px-1.5 py-0.5 bg-surface-sunken">⌘K</span>
+</div>
+<button aria-label="settings" class="p-2 text-ink-secondary hover:bg-surface-sunken rounded-lg transition-colors scale-101 transition-transform duration-160 ease-out">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button aria-label="notifications" class="p-2 text-ink-secondary hover:bg-surface-sunken rounded-lg transition-colors scale-101 transition-transform duration-160 ease-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Floating New Stories Pill -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-40">
+<button class="bg-brand-primary text-white rounded-full px-4 py-2 flex items-center gap-2 shadow-overlay hover:bg-brand-hover transition-all duration-200 hover:-translate-y-0.5 active:scale-95">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+<span class="text-sm font-medium">7 new stories</span>
+</button>
+</div>
+<!-- Freshness Strip -->
+<div class="mt-16 bg-surface-sunken border-b border-border-hairline h-10 flex items-center justify-center px-4 sm:px-8 z-30 relative">
+<div class="max-w-[1200px] w-full flex justify-between items-center">
+<div class="flex items-center gap-2 text-[13px] text-ink-secondary">
+<div class="w-2 h-2 rounded-full bg-success pulse-dot"></div>
+<span>Updated 12 minutes ago <span class="middot"></span> 478 stories from 14 sources</span>
+</div>
+<button class="flex items-center gap-1.5 text-[13px] font-medium text-ink-secondary hover:text-ink-primary hover:bg-border-hairline/50 px-2 py-1 rounded transition-colors">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+                Refresh
+            </button>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-grow max-w-[1200px] mx-auto w-full px-4 sm:px-8 py-12 flex flex-col gap-12">
+<!-- Lead Story -->
+<article class="flex flex-col gap-6 group">
+<div class="flex items-center text-ink-muted">
+<span class="label-sm text-sports">SPORTS</span>
+<span class="label-sm middot">ESPN</span>
+<span class="label-sm middot">12m ago</span>
+</div>
+<h1 class="font-headline text-4xl sm:text-[44px] leading-tight font-bold text-ink-primary group-hover:text-brand-primary transition-colors duration-200 cursor-pointer">
+                "The Process is over. This needs to be the product." — LeBron's move to Philadelphia puts the pressure on Maxey and Embiid
+            </h1>
+<p class="text-[17px] text-ink-secondary max-w-[68ch] leading-relaxed">
+                The shockwaves of James' decision are still reverberating through the Eastern Conference. But for the 76ers, the mandate is no longer about building for tomorrow. The window is now, and the expectations are championship or bust.
+            </p>
+<div class="flex items-center justify-between mt-2 pt-6 border-t border-border-hairline">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded bg-sports-tint text-sports flex items-center justify-center font-bold text-xs uppercase">ES</div>
+<span class="text-sm font-medium text-ink-primary">Ramona Shelburne</span>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Bookmark" class="text-ink-secondary hover:bg-surface-sunken p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+<button class="bg-brand-primary hover:bg-brand-hover active:scale-99 text-white px-5 py-2.5 rounded-lg text-sm font-medium flex items-center gap-2 transition-all">
+                        Read at ESPN
+                        <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Filter Rail / Sticky Bar -->
+<div class="sticky top-16 z-30 bg-canvas/95 backdrop-blur py-4 border-b border-border-hairline flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 -mx-4 sm:mx-0 px-4 sm:px-0">
+<div class="flex flex-wrap gap-2">
+<button class="h-8 px-3 rounded-full text-[13px] font-semibold border border-brand-primary bg-brand-tint text-brand-primary flex items-center gap-1.5 transition-colors">
+                    All <span class="opacity-60 text-xs">478</span>
+</button>
+<button class="h-8 px-3 rounded-full text-[13px] font-semibold border border-border-hairline text-ink-secondary hover:bg-tech-tint transition-colors">
+                    Tech
+                </button>
+<button class="h-8 px-3 rounded-full text-[13px] font-semibold border border-border-hairline text-ink-secondary hover:bg-world-tint transition-colors">
+                    World
+                </button>
+<button class="h-8 px-3 rounded-full text-[13px] font-semibold border border-border-hairline text-ink-secondary hover:bg-business-tint transition-colors">
+                    Business
+                </button>
+<button class="h-8 px-3 rounded-full text-[13px] font-semibold border border-border-hairline text-ink-secondary hover:bg-sports-tint transition-colors">
+                    Sports
+                </button>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface border border-border-hairline rounded-lg py-2 pl-3 pr-8 text-sm font-medium text-ink-primary focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary cursor-pointer">
+<option>Newest first</option>
+<option>Oldest first</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-ink-muted text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Article Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-tech shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-tech">TECH</span>
+<span class="label-sm middot">The Verge</span>
+<span class="label-sm middot">34m</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    Apple's foldable iPhone reportedly pushed back to 2027 due to display crease issues
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    Engineers are struggling to eliminate the visible crease on inner displays sourced from Samsung and LG, prompting a delay in the highly anticipated device.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-tech-tint text-tech flex items-center justify-center font-bold text-[10px] uppercase">TV</div>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button aria-label="Bookmark" class="p-1.5 text-ink-muted hover:text-ink-primary hover:bg-surface-sunken rounded-md"><span class="material-symbols-outlined text-[18px]">bookmark_border</span></button>
+<button aria-label="Open external" class="p-1.5 text-ink-muted hover:text-brand-primary hover:bg-brand-tint rounded-md"><span class="material-symbols-outlined text-[18px]">arrow_outward</span></button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-world shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-world">WORLD</span>
+<span class="label-sm middot">BBC News</span>
+<span class="label-sm middot">41m</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    EU brokers new grain transit deal amid rising tensions at Polish border
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    Diplomats reach a tentative agreement to ensure agricultural exports bypass local markets, aiming to placate protesting farmers blockading key checkpoints.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-world-tint text-world flex items-center justify-center font-bold text-[10px] uppercase">BB</div>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-ink-muted hover:text-ink-primary hover:bg-surface-sunken rounded-md"><span class="material-symbols-outlined text-[18px]">bookmark_border</span></button>
+<button class="p-1.5 text-ink-muted hover:text-brand-primary hover:bg-brand-tint rounded-md"><span class="material-symbols-outlined text-[18px]">arrow_outward</span></button>
+</div>
+</div>
+</article>
+<!-- Card 3 (Image) -->
+<article class="bg-surface border border-border-hairline rounded-lg shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<img class="w-full aspect-video object-cover rounded-t-lg border-b border-border-hairline" data-alt="A professional news photograph showing the Federal Reserve building exterior in Washington DC under bright daylight, conveying a serious business news context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAnfGH6_0UMstnX1yTjDwoyzGo3ereD8pzhVK9xt6F4W5UHGJQAtQvUGpjtaWrcO58msH7AOHd56Bp7v7e1lpFBOPnu0Azb1YQJoWmlcUx5w9xcWuIOvQJ4kNnyyniM2Uj54Pz-wePPHPaIzisJvyK5rRZvGi1uFPMZfyaqe0-JTi4hdqt_kpvZkcMW9tumkyQpq5m0ACtZGljh4oG6G9I_znTnbi_k0JsbpbLtEUUE1KgpM2FE9JQhdZwVb31Om3Q7nNRxGTyDT71">
+<div class="p-5 border-l-[3px] border-l-business flex flex-col flex-grow">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-business">BUSINESS</span>
+<span class="label-sm middot">CNBC</span>
+<span class="label-sm middot">52m</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                        Federal Reserve holds interest rates steady, signals potential for one cut late this year
+                    </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                        Chairman Powell cited 'modest' progress on inflation but reiterated the need for sustained data before easing monetary policy.
+                    </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-business-tint text-business flex items-center justify-center font-bold text-[10px] uppercase">CN</div>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-ink-muted hover:text-ink-primary hover:bg-surface-sunken rounded-md"><span class="material-symbols-outlined text-[18px]">bookmark_border</span></button>
+<button class="p-1.5 text-ink-muted hover:text-brand-primary hover:bg-brand-tint rounded-md"><span class="material-symbols-outlined text-[18px]">arrow_outward</span></button>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-tech shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-tech">TECH</span>
+<span class="label-sm middot">Ars Technica</span>
+<span class="label-sm middot">1h</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    Critical Linux kernel patch merged to address long-standing networking vulnerability
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    The vulnerability, which lay dormant for nearly a decade, could allow remote code execution under specific, albeit rare, configurations.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-tech-tint text-tech flex items-center justify-center font-bold text-[10px] uppercase">AT</div>
+</div>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-sports shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-sports">SPORTS</span>
+<span class="label-sm middot">BBC Sport</span>
+<span class="label-sm middot">1h</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    Jurgen Klopp named Germany national team manager ahead of World Cup qualifiers
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    The former Liverpool boss ends his sabbatical early to lead his home nation, promising high-intensity football for the upcoming campaign.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-sports-tint text-sports flex items-center justify-center font-bold text-[10px] uppercase">BB</div>
+</div>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-world shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-world">WORLD</span>
+<span class="label-sm middot">Al Jazeera</span>
+<span class="label-sm middot">2h</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    International aid convoys finally reach blockaded northern provinces
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    Essential medical supplies and food rations arrive after weeks of delays, providing brief respite to the besieged civilian population.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-world-tint text-world flex items-center justify-center font-bold text-[10px] uppercase">AJ</div>
+</div>
+</div>
+</article>
+<!-- Skeleton Row (3 cards) -->
+<div class="bg-surface border border-border-hairline rounded-lg p-5 shadow-rest h-[220px] flex flex-col">
+<div class="w-32 h-4 rounded shimmer mb-4"></div>
+<div class="w-full h-6 rounded shimmer mb-2 mt-1"></div>
+<div class="w-11/12 h-6 rounded shimmer mb-2"></div>
+<div class="w-3/4 h-6 rounded shimmer mb-4"></div>
+<div class="mt-auto flex items-center gap-2">
+<div class="w-6 h-6 rounded shimmer"></div>
+</div>
+</div>
+<div class="bg-surface border border-border-hairline rounded-lg p-5 shadow-rest h-[220px] flex flex-col hidden md:flex">
+<div class="w-24 h-4 rounded shimmer mb-4"></div>
+<div class="w-full h-6 rounded shimmer mb-2 mt-1"></div>
+<div class="w-4/5 h-6 rounded shimmer mb-2"></div>
+<div class="w-full h-6 rounded shimmer mb-4"></div>
+<div class="mt-auto flex items-center gap-2">
+<div class="w-6 h-6 rounded shimmer"></div>
+</div>
+</div>
+<div class="bg-surface border border-border-hairline rounded-lg p-5 shadow-rest h-[220px] flex flex-col hidden lg:flex">
+<div class="w-36 h-4 rounded shimmer mb-4"></div>
+<div class="w-full h-6 rounded shimmer mb-2 mt-1"></div>
+<div class="w-full h-6 rounded shimmer mb-2"></div>
+<div class="w-2/3 h-6 rounded shimmer mb-4"></div>
+<div class="mt-auto flex items-center gap-2">
+<div class="w-6 h-6 rounded shimmer"></div>
+</div>
+</div>
+<!-- Card 7 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-business shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-business">BUSINESS</span>
+<span class="label-sm middot">The Guardian</span>
+<span class="label-sm middot">2h</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    Sterling slides against dollar following disappointing retail sales figures
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    Consumer spending slowed significantly in Q2, raising concerns about the broader economic recovery and potential Bank of England intervention.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-business-tint text-business flex items-center justify-center font-bold text-[10px] uppercase">TG</div>
+</div>
+</div>
+</article>
+<!-- Card 8 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-tech shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-tech">TECH</span>
+<span class="label-sm middot">TechCrunch</span>
+<span class="label-sm middot">3h</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    Are mega seed rounds killing early-stage innovation?
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    Founders are raising massive initial tranches of capital, leading to inflated valuations and unrealistic growth expectations before finding product-market fit.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-tech-tint text-tech flex items-center justify-center font-bold text-[10px] uppercase">TC</div>
+</div>
+</div>
+</article>
+<!-- Card 9 -->
+<article class="bg-surface border border-border-hairline rounded-lg p-5 border-l-[3px] border-l-sports shadow-rest hover:shadow-hover hover:border-border-strong hover:-translate-y-[2px] transition-all duration-160 flex flex-col group cursor-pointer relative overflow-hidden">
+<div class="flex items-center text-ink-muted mb-3">
+<span class="label-sm text-sports">SPORTS</span>
+<span class="label-sm middot">ESPN</span>
+<span class="label-sm middot">3h</span>
+</div>
+<h2 class="font-headline text-[22px] leading-snug font-semibold text-ink-primary group-hover:text-brand-primary transition-colors line-clamp-3 mb-2">
+                    Does Klopp need Germany more than Germany needs Klopp?
+                </h2>
+<p class="text-sm text-ink-secondary line-clamp-2 mb-4 flex-grow">
+                    Analysis: The marriage of the charismatic manager and the struggling national team seems perfect, but systemic issues in German football run deeper than the dugout.
+                </p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-sports-tint text-sports flex items-center justify-center font-bold text-[10px] uppercase">ES</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination / Load More -->
+<div class="flex flex-col items-center gap-4 mt-8 pb-12">
+<div class="w-full max-w-md h-1 bg-surface-sunken rounded-full overflow-hidden">
+<div class="h-full bg-brand-primary w-[4%]"></div>
+</div>
+<p class="text-sm font-medium text-ink-secondary">Showing 20 of 478 stories</p>
+<button class="bg-surface border border-border-strong text-ink-primary hover:bg-surface-sunken active:scale-99 px-6 py-2.5 rounded-lg text-sm font-medium transition-all">
+                Load more stories
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-sunken w-full mt-auto border-t border-border-hairline">
+<div class="max-w-[1200px] mx-auto py-12 px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="col-span-1 md:col-span-2 lg:col-span-1 flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-ink-primary rounded-sm"></div>
+<span class="font-headline text-xl font-bold text-ink-primary">Aggregator</span>
+</div>
+<p class="font-body text-sm text-ink-secondary mt-2">
+                    © 2024 Smart News Aggregator. Pipeline syncs every 30 minutes from 14 global publishers.
+                </p>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-label text-[11px] font-bold uppercase tracking-[0.08em] text-ink-primary mb-1">Categories</h3>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">Tech</a>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">World</a>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">Business</a>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">Sports</a>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-label text-[11px] font-bold uppercase tracking-[0.08em] text-ink-primary mb-1">Sources</h3>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">View all 14 publishers</a>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">Publisher guidelines</a>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="font-label text-[11px] font-bold uppercase tracking-[0.08em] text-ink-primary mb-1">About</h3>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">About the project</a>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body text-sm text-ink-muted hover:text-ink-secondary transition-colors" href="#">API Status <span class="inline-block w-2 h-2 rounded-full bg-success ml-1"></span></a>
+</div>
+</div>
+</footer>
+</body></html>

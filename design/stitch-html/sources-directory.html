@@ -1,0 +1,269 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Smart News Aggregator - Sources Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Newsreader:opsz,wght@6..72,400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1d1b17",
+                        "inverse-surface": "#32302b",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#1a365d",
+                        "background": "#fef9f0",
+                        "inverse-primary": "#adc7f7",
+                        "surface-container-low": "#f9f3eb",
+                        "on-primary-container": "#86a0cd",
+                        "tertiary": "#002522",
+                        "surface-dim": "#dfd9d1",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f6f0e8",
+                        "surface": "#fef9f0",
+                        "surface-bright": "#fef9f0",
+                        "secondary-fixed": "#d9e3f4",
+                        "secondary-container": "#d9e3f4",
+                        "on-primary": "#ffffff",
+                        "secondary": "#555f6d",
+                        "tertiary-fixed": "#9cf2e8",
+                        "tertiary-fixed-dim": "#80d5cb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1d1b17",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-secondary-fixed": "#121c28",
+                        "primary-fixed-dim": "#adc7f7",
+                        "on-secondary-fixed-variant": "#3e4855",
+                        "surface-variant": "#e7e2da",
+                        "on-surface-variant": "#43474e",
+                        "on-tertiary-container": "#56ada3",
+                        "tertiary-container": "#003d38",
+                        "outline": "#74777f",
+                        "on-primary-fixed": "#001b3c",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#bdc7d7",
+                        "surface-tint": "#455f88",
+                        "on-secondary-container": "#5b6573",
+                        "primary": "#002045",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e7e2da",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-high": "#ede7df",
+                        "surface-container": "#f3ede5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin": "24px",
+                        "base": "8px",
+                        "tight": "4px",
+                        "rail-width": "260px",
+                        "gutter": "24px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-md": ["Newsreader"],
+                        "headline-sm": ["Newsreader"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "display-md": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom category colors specified in prompt, bypassing generic theme restrictions for these specific structural accents */
+        .border-tech { border-color: #4F46E5; }
+        .text-tech { color: #4F46E5; }
+        .bg-tech-tint { background-color: rgba(79, 70, 229, 0.1); }
+        
+        .border-world { border-color: #0F766E; }
+        .text-world { color: #0F766E; }
+        .bg-world-tint { background-color: rgba(15, 118, 110, 0.1); }
+        
+        .border-business { border-color: #B45309; }
+        .text-business { color: #B45309; }
+        .bg-business-tint { background-color: rgba(180, 83, 9, 0.1); }
+        
+        .border-sports { border-color: #BE123C; }
+        .text-sports { color: #BE123C; }
+        .bg-sports-tint { background-color: rgba(190, 18, 60, 0.1); }
+
+        .sparkline {
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        body { background-color: #FBFAF8; }
+        .page-text-muted { color: #6A6E76; }
+        .page-border-subtle { border-color: #E7E3DC; }
+        .page-border-strong { border-color: #D6D1C7; }
+    </style>
+</head>
+<body class="font-body-sm text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FBFAF8] dark:bg-[#14181F] bg-opacity-90 backdrop-blur-sm border-b border-[#E7E3DC] dark:border-[#5A6472] shadow-sm flex justify-between items-center px-8 h-16 max-w-[1200px] mx-auto inset-x-0">
+<div class="flex items-center space-x-8">
+<span class="font-display-md text-[24px] font-bold text-[#14181F] dark:text-[#FBFAF8]">Smart News</span>
+<nav class="hidden md:flex space-x-6">
+<!-- Navigation intent fallback based on context. Page intent is "Sources". No exact match in provided nav array. We will suppress nav active state highlight as per "Semantic Mapping" anti-hallucination rule. -->
+<a class="text-[#5A6472] hover:text-[#14181F] font-body-sm font-semibold tracking-tight hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">Latest</a>
+<a class="text-[#5A6472] hover:text-[#14181F] font-body-sm font-semibold tracking-tight hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">Tech</a>
+<a class="text-[#5A6472] hover:text-[#14181F] font-body-sm font-semibold tracking-tight hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">World</a>
+<a class="text-[#5A6472] hover:text-[#14181F] font-body-sm font-semibold tracking-tight hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">Business</a>
+<a class="text-[#5A6472] hover:text-[#14181F] font-body-sm font-semibold tracking-tight hover:bg-[#F4F2EE] transition-colors duration-160 px-2 py-1 rounded" href="#">Sports</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<!-- Search bar on right as per component JSON -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#5A6472] text-[18px]">search</span>
+<input class="w-48 pl-9 pr-4 py-1.5 bg-[#F4F2EE] border-transparent rounded-full text-sm focus:border-[#1A365D] focus:ring-1 focus:ring-[#1A365D] transition-all" placeholder="Search..." type="text">
+</div>
+<button class="text-[#1A365D] dark:text-[#EEF2F7] scale-101 transition-transform duration-160 ease-out p-2 rounded-full hover:bg-[#F4F2EE]"><span class="material-symbols-outlined">settings</span></button>
+<button class="text-[#1A365D] dark:text-[#EEF2F7] scale-101 transition-transform duration-160 ease-out p-2 rounded-full hover:bg-[#F4F2EE]"><span class="material-symbols-outlined">notifications</span></button>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto pt-24 pb-24 px-6 md:px-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+<div>
+<h1 class="font-display-md text-[32px] text-primary-container m-0">Sources</h1>
+<p class="font-body-sm text-[15px] page-text-muted mt-1">14 publishers, 478 stories, last collected 12 minutes ago</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<div class="relative w-full sm:w-[280px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full pl-9 pr-4 h-[44px] border-[#949089] rounded-DEFAULT bg-surface text-on-surface focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container transition-all placeholder:text-[#949089]" placeholder="Filter sources" type="text">
+</div>
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-surface-variant h-[44px]">
+<button class="px-4 py-1 rounded-DEFAULT bg-surface shadow-sm border border-surface-variant font-label-sm text-on-surface flex items-center justify-center min-w-[80px]">ALL</button>
+<button class="px-4 py-1 rounded-DEFAULT font-label-sm page-text-muted hover:bg-surface hover:bg-opacity-50 transition-colors flex items-center justify-center min-w-[80px]">ACTIVE</button>
+<button class="px-4 py-1 rounded-DEFAULT font-label-sm page-text-muted hover:bg-surface hover:bg-opacity-50 transition-colors flex items-center justify-center min-w-[80px]">PAUSED</button>
+</div>
+</div>
+</div>
+<!-- Stats Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-12">
+<div class="bg-surface border page-border-subtle rounded-lg p-5 flex flex-col justify-center">
+<div class="font-display-md text-[28px] text-on-surface">14</div>
+<div class="font-label-sm uppercase page-text-muted mt-1">Sources</div>
+</div>
+<div class="bg-surface border page-border-subtle rounded-lg p-5 flex flex-col justify-center">
+<div class="font-display-md text-[28px] text-on-surface">478</div>
+<div class="font-label-sm uppercase page-text-muted mt-1">Stories</div>
+</div>
+<div class="bg-surface border page-border-subtle rounded-lg p-5 flex flex-col justify-center">
+<div class="font-display-md text-[28px] text-on-surface">30 <span class="text-lg">min</span></div>
+<div class="font-label-sm uppercase page-text-muted mt-1">Refresh interval</div>
+</div>
+<div class="bg-surface border page-border-subtle rounded-lg p-5 flex flex-col justify-center">
+<div class="font-display-md text-[28px] text-on-surface">13 <span class="text-lg text-outline">of 14</span></div>
+<div class="font-label-sm uppercase page-text-muted mt-1">Active</div>
+</div>
+</div>
+<!-- Sources Grid: TECH -->
+<div class="mb-12">
+<h2 class="font-label-sm uppercase text-tech mb-6 flex items-center gap-2">TECH <span class="bg-tech-tint px-2 py-0.5 rounded-full text-[10px]">4</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter auto-rows-fr">
+<!-- The Verge -->
+<div class="bg-on-secondary rounded-lg border page-border-subtle p-5 border-l-[3px] border-tech shadow-[0_1px_2px_rgba(20,24,31,0.04)] hover:shadow-[0_6px_16px_-4px_rgba(20,24,31,0.10)] hover:border-r-page-border-strong hover:border-y-page-border-strong hover:-translate-y-[2px] transition-all duration-200 flex flex-col h-full">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tech-tint text-tech font-label-sm text-[16px] flex items-center justify-center font-bold">TV</div>
+<div class="font-body-sm font-semibold text-[15px] text-on-surface">The Verge</div>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-2 h-2 rounded-full bg-tertiary-container"></div>
+<span class="font-label-sm text-[10px] text-outline">ACTIVE</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-display-md text-[24px]">24</span>
+<span class="font-body-sm text-[13px] page-text-muted">stories</span>
+</div>
+<div class="h-8 mb-4 w-full opacity-30">
+<svg class="w-full h-full preserve-aspect-ratio-none" viewBox="0 0 100 20">
+<path class="sparkline text-tech" d="M0,15 L10,12 L20,18 L30,5 L40,8 L50,15 L60,10 L70,12 L80,2 L90,15 L100,8" stroke="currentColor"></path>
+</svg>
+</div>
+<div class="flex flex-col gap-1 mb-6 mt-auto">
+<span class="font-label-sm text-outline">Last fetch 12m ago</span>
+<span class="font-mono text-[11px] text-outline truncate">https://www.theverge.com/rss/index.xml</span>
+</div>
+<button class="w-full h-10 bg-surface rounded-DEFAULT border page-border-strong font-body-sm text-[13px] font-semibold text-on-surface hover:bg-surface-variant transition-colors">View stories</button>
+</div>
+<!-- TechCrunch -->
+<div class="bg-on-secondary rounded-lg border page-border-subtle p-5 border-l-[3px] border-tech shadow-[0_1px_2px_rgba(20,24,31,0.04)] hover:shadow-[0_6px_16px_-4px_rgba(20,24,31,0.10)] hover:border-r-page-border-strong hover:border-y-page-border-strong hover:-translate-y-[2px] transition-all duration-200 flex flex-col h-full">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tech-tint text-tech font-label-sm text-[16px] flex items-center justify-center font-bold">TC</div>
+<div class="font-body-sm font-semibold text-[15px] text-on-surface">TechCrunch</div>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-2 h-2 rounded-full bg-tertiary-container"></div>
+<span class="font-label-sm text-[10px] text-outline">ACTIVE</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2 mb-4">
+<span class="font-display-md text-[24px]">15</span>
+<span class="font-body-sm text-[13px] page-text-muted">stories</span>
+</div>
+<div class="h-8 mb-4 w-full opacity-30">
+<svg class="w-full h-full preserve-aspect-ratio-none" viewBox="0 0 100 20">
+<path class="sparkline text-tech" d="M0,10 L15,12 L30,5 L45,15 L60,8 L75,18 L90,10 L100,5" stroke="currentColor"></path>
+</svg>
+</div>
+<div class="flex flex-col gap-1 mb-6 mt-auto">
+<span class="font-label-sm text-outline">Last fetch 12m ago</span>
+<span class="font-mono text-[11px] text-outline truncate">https://techcrunch.com/feed/</span>
+</div>
+<button class="w-full h-10 bg-surface rounded-DEFAULT border page-border-strong font-body-sm text-[13px] font-semibold text-on-surface hover:bg-surface-variant transition-colors">View stories</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-12 border-t border-[#E7E3DC] bg-[#FBFAF8] dark:bg-[#14181F]">
+<div class="max-w-[1200px] mx-auto py-12 px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="col-span-1 md:col-span-2 lg:col-span-4 mb-4">
+<span class="font-headline-sm text-xl font-bold text-[#14181F]">Smart News</span>
+</div>
+<div class="col-span-1 md:col-span-2 lg:col-span-4 flex flex-wrap gap-6 mb-4">
+<a class="font-body-sm text-sm text-[#8A8F99] hover:text-[#5A6472] hover:underline decoration-[#D6D1C7] transition-opacity duration-200" href="#">Categories</a>
+<a class="font-body-sm text-sm text-[#1A365D] font-bold hover:underline decoration-[#D6D1C7] transition-opacity duration-200" href="#">Sources</a>
+<a class="font-body-sm text-sm text-[#8A8F99] hover:text-[#5A6472] hover:underline decoration-[#D6D1C7] transition-opacity duration-200" href="#">About</a>
+<a class="font-body-sm text-sm text-[#8A8F99] hover:text-[#5A6472] hover:underline decoration-[#D6D1C7] transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="font-body-sm text-sm text-[#8A8F99] hover:text-[#5A6472] hover:underline decoration-[#D6D1C7] transition-opacity duration-200" href="#">API Status</a>
+</div>
+<div class="col-span-1 md:col-span-2 lg:col-span-4 border-t border-[#E7E3DC] pt-6">
+<p class="font-body-sm text-sm text-[#5A6472]">© 2024 Smart News Aggregator. Pipeline syncs every 30 minutes from 14 global publishers.</p>
+</div>
+</div>
+</footer>
+</body></html>

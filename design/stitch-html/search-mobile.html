@@ -1,0 +1,257 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Smart News - Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Newsreader:opsz,wght@6..72,400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#121c28",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#80d5cb",
+                        "secondary-container": "#d9e3f4",
+                        "inverse-on-surface": "#f6f0e8",
+                        "surface-bright": "#fef9f0",
+                        "on-secondary-container": "#5b6573",
+                        "outline": "#74777f",
+                        "inverse-surface": "#32302b",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#d6e3ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#f3ede5",
+                        "on-background": "#1d1b17",
+                        "on-error": "#ffffff",
+                        "primary": "#002045",
+                        "surface-container-highest": "#e7e2da",
+                        "tertiary": "#002522",
+                        "on-surface": "#1d1b17",
+                        "tertiary-container": "#003d38",
+                        "on-tertiary-fixed": "#00201d",
+                        "secondary-fixed-dim": "#bdc7d7",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "on-tertiary-container": "#56ada3",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#adc7f7",
+                        "background": "#fef9f0",
+                        "primary-container": "#1a365d",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#adc7f7",
+                        "on-primary-fixed": "#001b3c",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-low": "#f9f3eb",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#455f88",
+                        "secondary": "#555f6d",
+                        "on-primary-container": "#86a0cd",
+                        "surface-variant": "#e7e2da",
+                        "tertiary-fixed": "#9cf2e8",
+                        "on-secondary-fixed-variant": "#3e4855",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "surface-dim": "#dfd9d1",
+                        "surface": "#fef9f0",
+                        "secondary-fixed": "#d9e3f4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ede7df",
+                        "on-surface-variant": "#43474e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin": "24px",
+                        "container-max": "1200px",
+                        "tight": "4px",
+                        "base": "8px",
+                        "rail-width": "260px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Newsreader"],
+                        "body-sm": ["Inter"],
+                        "display-md": ["Newsreader"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-md": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .highlight { background-color: #FDF2E3; }
+        .shimmer {
+            animation: shimmer 1.4s infinite linear;
+            background: linear-gradient(to right, #EFECE7 4%, #F4F2EE 25%, #EFECE7 36%);
+            background-size: 1000px 100%;
+        }
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        /* Hide scrollbar for scope pills */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#FBFAF8] text-[#14181F] w-[390px] h-[844px] mx-auto overflow-hidden flex flex-col font-body-sm antialiased relative border border-gray-200">
+<!-- 56px Header: Search Field -->
+<header class="flex items-center px-4 h-[56px] border-b border-[#E7E3DC] shrink-0 bg-[#FBFAF8] z-10 sticky top-0">
+<div class="flex-1 relative flex items-center h-[40px] bg-[#F4F2EE] rounded-md">
+<span class="material-symbols-outlined text-[#5A6472] ml-3 text-[20px]">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-[#14181F] font-body-sm h-full px-2 placeholder-[#8A8F99]" placeholder="Search..." type="text" value="semiconductor">
+<button class="mr-2 w-6 h-6 flex items-center justify-center rounded-full bg-[#E7E3DC] text-[#5A6472] hover:bg-[#D6D1C7]">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<button class="ml-4 font-body-sm text-[#1A365D] hover:text-[#002045]">Cancel</button>
+</header>
+<!-- Scrollable content area -->
+<main class="flex-1 overflow-y-auto pb-[64px]">
+<!-- Filters Row -->
+<div class="flex items-center gap-2 px-4 py-3 overflow-x-auto no-scrollbar border-b border-[#E7E3DC]">
+<button class="px-4 py-[6px] rounded-full bg-[#1A365D] text-white font-body-sm whitespace-nowrap">All 18</button>
+<button class="px-4 py-[6px] rounded-full bg-white border border-[#E7E3DC] text-[#5A6472] font-body-sm whitespace-nowrap">Tech 11</button>
+<button class="px-4 py-[6px] rounded-full bg-white border border-[#E7E3DC] text-[#5A6472] font-body-sm whitespace-nowrap">Business 5</button>
+<button class="px-4 py-[6px] rounded-full bg-white border border-[#E7E3DC] text-[#5A6472] font-body-sm whitespace-nowrap">World 2</button>
+</div>
+<!-- Result Count -->
+<div class="px-4 py-3">
+<span class="text-[13px] font-body-sm text-[#6A6E76]">18 results</span>
+</div>
+<!-- Results List -->
+<div class="flex flex-col">
+<!-- Row 1 -->
+<article class="px-4 py-4 border-b border-[#E7E3DC] flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-[#4F46E5]">TECH</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#5A6472]">ARS TECHNICA</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#8A8F99] lowercase">2h</span>
+</div>
+<h3 class="font-headline-sm text-[#14181F] line-clamp-3">Apple's foldable iPhone reportedly pushed back to 2027 amid <span class="highlight">semiconductor</span> supply issues</h3>
+<p class="font-body-sm text-[#5A6472] text-[13px] line-clamp-2 leading-tight">Sources claim display crease durability and next-gen chip allocation are delaying the highly anticipated launch.</p>
+<div class="flex justify-between items-center mt-1">
+<div class="flex items-center gap-2">
+<div class="w-[28px] h-[28px] rounded flex items-center justify-center bg-[#EEF2FF] text-[#4F46E5] font-bold text-[11px]">AT</div>
+</div>
+</div>
+</article>
+<!-- Row 2 -->
+<article class="px-4 py-4 border-b border-[#E7E3DC] flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-[#B45309]">BUSINESS</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#5A6472]">CNBC</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#8A8F99] lowercase">3h</span>
+</div>
+<h3 class="font-headline-sm text-[#14181F] line-clamp-3">Federal Reserve holds interest rates steady as <span class="highlight">semiconductor</span> index rallies</h3>
+<p class="font-body-sm text-[#5A6472] text-[13px] line-clamp-2 leading-tight">The tech-heavy index saw a boost despite cautious macroeconomic outlooks from central bank officials.</p>
+<div class="flex justify-between items-center mt-1">
+<div class="flex items-center gap-2">
+<div class="w-[28px] h-[28px] rounded flex items-center justify-center bg-[#FFF7ED] text-[#B45309] font-bold text-[11px]">CN</div>
+</div>
+</div>
+</article>
+<!-- Row 3 -->
+<article class="px-4 py-4 border-b border-[#E7E3DC] flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-[#4F46E5]">TECH</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#5A6472]">THE VERGE</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#8A8F99] lowercase">5h</span>
+</div>
+<h3 class="font-headline-sm text-[#14181F] line-clamp-3">New EU legislation targets <span class="highlight">semiconductor</span> manufacturing sustainability</h3>
+<p class="font-body-sm text-[#5A6472] text-[13px] line-clamp-2 leading-tight">Regulations aim to reduce water usage and rare earth material waste in European fabs over the next decade.</p>
+<div class="flex justify-between items-center mt-1">
+<div class="flex items-center gap-2">
+<div class="w-[28px] h-[28px] rounded flex items-center justify-center bg-[#EEF2FF] text-[#4F46E5] font-bold text-[11px]">TV</div>
+</div>
+</div>
+</article>
+<!-- Row 4 -->
+<article class="px-4 py-4 border-b border-[#E7E3DC] flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-[#0F766E]">WORLD</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#5A6472]">AL JAZEERA</span>
+<span class="text-[#8A8F99] text-[11px] font-bold">·</span>
+<span class="font-label-sm text-[#8A8F99] lowercase">8h</span>
+</div>
+<h3 class="font-headline-sm text-[#14181F] line-clamp-3">International aid convoys finally reach blockaded northern provinces</h3>
+<p class="font-body-sm text-[#5A6472] text-[13px] line-clamp-2 leading-tight">Vital supplies have arrived after weeks of tense negotiations involving regional powers.</p>
+<div class="flex justify-between items-center mt-1">
+<div class="flex items-center gap-2">
+<div class="w-[28px] h-[28px] rounded flex items-center justify-center bg-[#F0FDFA] text-[#0F766E] font-bold text-[11px]">AJ</div>
+</div>
+</div>
+</article>
+<!-- Loading State Skeletons -->
+<div class="px-4 py-4 border-b border-[#E7E3DC] flex flex-col gap-3">
+<div class="flex gap-2 items-center">
+<div class="h-3 w-12 rounded shimmer"></div>
+<div class="h-3 w-20 rounded shimmer"></div>
+</div>
+<div class="h-5 w-full rounded shimmer"></div>
+<div class="h-5 w-3/4 rounded shimmer"></div>
+<div class="h-3 w-full mt-1 rounded shimmer"></div>
+<div class="h-3 w-2/3 rounded shimmer"></div>
+<div class="w-[28px] h-[28px] rounded shimmer mt-1"></div>
+</div>
+<div class="px-4 py-4 border-b border-[#E7E3DC] flex flex-col gap-3">
+<div class="flex gap-2 items-center">
+<div class="h-3 w-16 rounded shimmer"></div>
+<div class="h-3 w-24 rounded shimmer"></div>
+</div>
+<div class="h-5 w-[90%] rounded shimmer"></div>
+<div class="h-5 w-2/3 rounded shimmer"></div>
+<div class="h-3 w-full mt-1 rounded shimmer"></div>
+<div class="h-3 w-1/2 rounded shimmer"></div>
+<div class="w-[28px] h-[28px] rounded shimmer mt-1"></div>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Tab Bar -->
+<nav class="fixed bottom-0 w-[390px] h-[64px] bg-white border-t border-[#E7E3DC] flex items-center justify-around z-20 pb-safe">
+<button class="flex flex-col items-center justify-center gap-1 w-16 text-[#5A6472]">
+<span class="material-symbols-outlined text-[24px]">article</span>
+<span class="font-body-sm text-[10px]">Feed</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 w-16 text-[#1A365D]">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-body-sm text-[10px] font-bold">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 w-16 text-[#5A6472]">
+<span class="material-symbols-outlined text-[24px]">bookmark</span>
+<span class="font-body-sm text-[10px]">Saved</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 w-16 text-[#5A6472]">
+<span class="material-symbols-outlined text-[24px]">apps</span>
+<span class="font-body-sm text-[10px]">Sources</span>
+</button>
+</nav>
+</body></html>

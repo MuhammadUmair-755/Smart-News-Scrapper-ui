@@ -58,6 +58,20 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   View transitions — card → article preview.
+
+   The card headline and the preview's h1 share a `view-transition-name`, so the
+   browser morphs one into the other. Only the elements taking part carry the
+   name at any moment; two live elements sharing one name aborts the transition,
+   which is why components set it conditionally via `useViewTransitionState`.
+   --------------------------------------------------------------------------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-medium);
+  animation-timing-function: var(--ease-standard);
+}
+
 /* Respect the user's motion preference. Motion is part of the experience, but
    it is never load-bearing — every animation here degrades to an instant state
    change without losing meaning. Framer/Motion reads this via useReducedMotion;
@@ -74,5 +88,13 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* The morph is a transform, so it goes entirely — the navigation still
+     happens, it just cuts instead of animating. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }

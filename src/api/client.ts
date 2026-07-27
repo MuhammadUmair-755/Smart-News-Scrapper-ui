@@ -1,0 +1,99 @@
+/**
+ * The server boundary. Nothing outside `src/api/` performs HTTP.
+ *
+ * Defaults to `/api`, which the Vite dev proxy forwards to Django so requests
+ * are same-origin and CORS never applies. Set `VITE_API_BASE_URL` to an
+ * absolute URL to call Django directly — that origin must then be in
+ * `CORS_ALLOWED_ORIGINS`.
+ */
+
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? '/api').replace(/\/+$/, '')
+
+/**
+ * One normalised failure type. Components render `ErrorState` from this and
+ * never see a raw exception; `status` is what distinguishes a route-level 404
+ * from a banner-worthy error.
+ */
+export class ApiError extends Error {
+  readonly status: number
+
+  constructor(message: string, status: number) {
+    super(message)
+    this.name = 'ApiError'
+    this.status = status
+  }
+
+  /** A 4xx is the caller's fault and will fail identically on retry. */
+  get isClientError(): boolean {
+    return this.status >= 400 && this.status < 500
+  }
+}
+
+/**
+ * The API returns two different error bodies and both have to collapse into
+ * one message:
+ *   A — `{"detail": "No Article matches the given query."}`  (404s)
+ *   B — `{"source": ["Enter a number."]}`                    (400s, key is the
+ *       offending query parameter)
+ */
+function messageFrom(body: unknown, status: number): string {
+  if (typeof body === 'object' && body !== null) {
+    const record = body as Record<string, unknown>
+
+    if (typeof record.detail === 'string') return record.detail
+
+    const first = Object.values(record)[0]
+    if (Array.isArray(first) && typeof first[0] === 'string') return first[0]
+  }
+
+  if (status >= 500) return 'The server is not responding.'
+  return 'Something went wrong.'
+}
+
+/**
+ * Drops `undefined`, `null` and `""` so an untouched filter never reaches the
+ * URL — `?category=` with an empty value is not the same request as no
+ * `category` at all.
+ */
+export function toSearchParams(query: Record<string, unknown>): string {
+  const params = new URLSearchParams()
+
+  for (const [key, value] of Object.entries(query)) {
+    if (value === undefined || value === null || value === '') continue
+    params.set(key, String(value))
+  }
+
+  const serialised = params.toString()
+  return serialised ? `?${serialised}` : ''
+}
+
+/**
+ * `path` must carry its trailing slash. Django redirects `/api/articles` to
+ * `/api/articles/` with a 301 — fetch follows it, so it works, but every call
+ * pays an extra round trip.
+ */
+export async function request<T>(
+  path: string,
+  query: Record<string, unknown> = {},
+  init?: RequestInit,
+): Promise<T> {
+  const url = `${BASE_URL}${path}${toSearchParams(query)}`
+
+  let response: Response
+  try {
+    response = await fetch(url, {
+      headers: { Accept: 'application/json' },
+      ...init,
+    })
+  } catch {
+    // Network-level failure: DNS, offline, connection refused, CORS block.
+    throw new ApiError('Could not reach the server.', 0)
+  }
+
+  if (!response.ok) {
+    const body: unknown = await response.json().catch(() => null)
+    throw new ApiError(messageFrom(body, response.status), response.status)
+  }
+
+  return response.json() as Promise<T>
+}

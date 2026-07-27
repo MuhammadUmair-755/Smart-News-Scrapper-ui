@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mobile Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#adc7f7",
+                        "inverse-primary": "#adc7f7",
+                        "outline": "#74777f",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#86a0cd",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "inverse-on-surface": "#f6f0e8",
+                        "surface-container-high": "#ede7df",
+                        "primary-fixed": "#d6e3ff",
+                        "primary-container": "#1a365d",
+                        "secondary-container": "#d9e3f4",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1d1b17",
+                        "surface-variant": "#e7e2da",
+                        "surface-tint": "#455f88",
+                        "on-secondary-fixed": "#121c28",
+                        "on-primary-fixed": "#001b3c",
+                        "secondary-fixed-dim": "#bdc7d7",
+                        "background": "#fef9f0",
+                        "surface-container": "#f3ede5",
+                        "surface-dim": "#dfd9d1",
+                        "surface": "#fef9f0",
+                        "primary": "#002045",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e7e2da",
+                        "tertiary-fixed-dim": "#80d5cb",
+                        "on-error": "#ffffff",
+                        "secondary": "#555f6d",
+                        "on-secondary-container": "#5b6573",
+                        "tertiary": "#002522",
+                        "on-tertiary-container": "#56ada3",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d9e3f4",
+                        "outline-variant": "#c4c6cf",
+                        "tertiary-container": "#003d38",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "on-background": "#1d1b17",
+                        "on-tertiary-fixed": "#00201d",
+                        "tertiary-fixed": "#9cf2e8",
+                        "surface-container-low": "#f9f3eb",
+                        "on-secondary-fixed-variant": "#3e4855",
+                        "surface-bright": "#fef9f0",
+                        "on-surface-variant": "#43474e",
+                        "inverse-surface": "#32302b",
+                        "accent-tech": "#4F46E5",
+                        "accent-tech-bg": "#E0E7FF",
+                        "accent-world": "#0F766E",
+                        "accent-world-bg": "#CCFBF1",
+                        "accent-business": "#B45309",
+                        "accent-business-bg": "#FEF3C7",
+                        "accent-sports": "#BE123C",
+                        "accent-sports-bg": "#FFE4E6",
+                        "ink-muted": "#6A6E76",
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        margin: "24px",
+                        "container-max": "1200px",
+                        "rail-width": "260px",
+                        tight: "4px",
+                        gutter: "24px",
+                        base: "8px"
+                    },
+                    fontFamily: {
+                        "headline-sm": ["Newsreader", "serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "display-md": ["Newsreader", "serif"]
+                    },
+                    fontSize: {
+                        "headline-sm": ["20px", { lineHeight: "1.4", fontWeight: "600" }],
+                        "label-sm": ["11px", { lineHeight: "1", letterSpacing: "0.08em", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "display-md": ["36px", { lineHeight: "1.2", fontWeight: "600" }]
+                    },
+                    boxShadow: {
+                        'subtle': '0 1px 2px rgba(20,24,31,0.04)',
+                        'floating': '0 6px 16px -4px rgba(20,24,31,0.10)',
+                    },
+                    animation: {
+                        shimmer: 'shimmer 1.4s infinite linear',
+                        pulse_dot: 'pulse_dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' },
+                        },
+                        pulse_dot: {
+                            '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                            '50%': { opacity: .5, transform: 'scale(1.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #FBFAF8;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .shimmer-bg {
+            background: #EFECE7;
+            background-image: linear-gradient(to right, #EFECE7 0%, #f6f4f0 20%, #EFECE7 40%, #EFECE7 100%);
+            background-repeat: no-repeat;
+            background-size: 1000px 100%;
+        }
+        
+        /* Clamp text utilities */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-body-sm text-on-surface antialiased pb-20 selection:bg-primary-fixed selection:text-primary">
+<!-- Sticky Header -->
+<header class="sticky top-0 w-full bg-white/90 backdrop-blur-md z-40 border-b border-surface-variant flex items-center justify-between px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 bg-primary rounded-sm flex items-center justify-center">
+<span class="text-white text-[10px] font-bold">A</span>
+</div>
+<span class="font-headline-sm text-[17px] text-primary tracking-tight">Aggregator</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">search</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+</button>
+</div>
+</header>
+<!-- Pull to Refresh Area (Hidden conceptually, but present for UI realism) -->
+<div class="h-10 flex items-center justify-center gap-2 text-ink-muted bg-transparent">
+<span class="material-symbols-outlined text-[14px] animate-spin">refresh</span>
+<span class="text-[11px] font-medium tracking-wide">Release to refresh</span>
+</div>
+<!-- Category Pills -->
+<div class="relative w-full z-30 bg-[#FBFAF8] pt-2 pb-3">
+<div class="overflow-x-auto hide-scrollbar pl-4 pr-12 flex gap-2">
+<button class="px-4 py-1.5 rounded-full border border-primary bg-primary text-white text-[13px] font-medium whitespace-nowrap flex-shrink-0 transition-colors">
+                All <span class="opacity-70 ml-1 text-[11px]">478</span>
+</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant bg-white text-secondary hover:border-primary hover:text-primary text-[13px] font-medium whitespace-nowrap flex-shrink-0 transition-colors">
+                Tech <span class="opacity-70 ml-1 text-[11px]">70</span>
+</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant bg-white text-secondary hover:border-primary hover:text-primary text-[13px] font-medium whitespace-nowrap flex-shrink-0 transition-colors">
+                World <span class="opacity-70 ml-1 text-[11px]">116</span>
+</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant bg-white text-secondary hover:border-primary hover:text-primary text-[13px] font-medium whitespace-nowrap flex-shrink-0 transition-colors">
+                Business <span class="opacity-70 ml-1 text-[11px]">112</span>
+</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant bg-white text-secondary hover:border-primary hover:text-primary text-[13px] font-medium whitespace-nowrap flex-shrink-0 transition-colors">
+                Sports <span class="opacity-70 ml-1 text-[11px]">180</span>
+</button>
+</div>
+<!-- Soft white fade over right edge -->
+<div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#FBFAF8] to-transparent pointer-events-none"></div>
+</div>
+<!-- Freshness Line & Floating Pill -->
+<div class="px-4 mb-4 relative z-20 flex flex-col items-center">
+<div class="flex items-center justify-center gap-2 mb-2 w-full border-b border-surface-variant pb-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse_dot"></div>
+<span class="text-[11px] text-ink-muted uppercase tracking-wider font-semibold">Updated 12 minutes ago</span>
+</div>
+<!-- Floating Pill -->
+<div class="absolute top-6 left-1/2 -translate-x-1/2">
+<button class="bg-primary text-white rounded-full px-4 py-2 flex items-center gap-2 shadow-floating hover:scale-105 transition-transform active:scale-95 text-[13px] font-medium">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                7 new stories
+            </button>
+</div>
+</div>
+<!-- Article Feed -->
+<main class="px-4 flex flex-col gap-3 pb-8 pt-6">
+<!-- 1. SPORTS -->
+<article class="bg-white rounded-lg border border-[#E7E3DC] shadow-subtle overflow-hidden relative group hover:border-[#D6D1C7] hover:shadow-floating hover:-translate-y-[2px] transition-all duration-200">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent-sports"></div>
+<div class="p-4 pl-5 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-secondary">
+<span class="text-accent-sports">Sports</span>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span>12m</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-[19px] leading-[1.3] text-on-surface mb-2">"The Process is over. This needs to be the product." - LeBron move to Philadelphia.</h2>
+</div>
+<div class="flex items-center justify-between mt-auto pt-2 border-t border-surface-variant/50">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-accent-sports-bg text-accent-sports flex items-center justify-center font-bold text-[11px]">
+                            ES
+                        </div>
+<span class="text-[13px] font-medium text-secondary">ESPN</span>
+</div>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+</button>
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- 2. TECH -->
+<article class="bg-white rounded-lg border border-[#E7E3DC] shadow-subtle overflow-hidden relative group hover:border-[#D6D1C7] hover:shadow-floating hover:-translate-y-[2px] transition-all duration-200">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent-tech"></div>
+<div class="p-4 pl-5 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-secondary">
+<span class="text-accent-tech">Tech</span>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span>34m</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-[19px] leading-[1.3] text-on-surface mb-2">Apple foldable iPhone enters final testing as suppliers ramp panel production</h2>
+</div>
+<div class="flex items-center justify-between mt-auto pt-2 border-t border-surface-variant/50">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-accent-tech-bg text-accent-tech flex items-center justify-center font-bold text-[11px]">
+                            TV
+                        </div>
+<span class="text-[13px] font-medium text-secondary">The Verge</span>
+</div>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+</button>
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- 3. WORLD -->
+<article class="bg-white rounded-lg border border-[#E7E3DC] shadow-subtle overflow-hidden relative group hover:border-[#D6D1C7] hover:shadow-floating hover:-translate-y-[2px] transition-all duration-200">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent-world"></div>
+<div class="p-4 pl-5 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-secondary">
+<span class="text-accent-world">World</span>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span>41m</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-[19px] leading-[1.3] text-on-surface mb-2">EU brokers emergency grain corridor deal after three days of talks</h2>
+</div>
+<div class="flex items-center justify-between mt-auto pt-2 border-t border-surface-variant/50">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-accent-world-bg text-accent-world flex items-center justify-center font-bold text-[11px]">
+                            BB
+                        </div>
+<span class="text-[13px] font-medium text-secondary">BBC News</span>
+</div>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+</button>
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- 4. Skeleton Card -->
+<div class="bg-white rounded-lg border border-[#E7E3DC] overflow-hidden p-4 relative">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-surface-variant"></div>
+<div class="flex items-center gap-2 mb-3 pl-2">
+<div class="h-3 w-12 rounded shimmer-bg animate-shimmer"></div>
+<div class="h-3 w-3 rounded-full shimmer-bg animate-shimmer"></div>
+<div class="h-3 w-8 rounded shimmer-bg animate-shimmer"></div>
+</div>
+<div class="pl-2 space-y-2 mb-4">
+<div class="h-5 w-full rounded shimmer-bg animate-shimmer"></div>
+<div class="h-5 w-5/6 rounded shimmer-bg animate-shimmer"></div>
+</div>
+<div class="pl-2 pt-3 border-t border-surface-variant/50 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded shimmer-bg animate-shimmer"></div>
+<div class="h-4 w-20 rounded shimmer-bg animate-shimmer"></div>
+</div>
+<div class="flex gap-2">
+<div class="w-6 h-6 rounded-full shimmer-bg animate-shimmer"></div>
+<div class="w-6 h-6 rounded-full shimmer-bg animate-shimmer"></div>
+</div>
+</div>
+</div>
+<!-- 5. BUSINESS -->
+<article class="bg-white rounded-lg border border-[#E7E3DC] shadow-subtle overflow-hidden relative group hover:border-[#D6D1C7] hover:shadow-floating hover:-translate-y-[2px] transition-all duration-200 flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent-business z-10"></div>
+<div class="w-full aspect-video bg-surface-variant relative overflow-hidden">
+<img alt="Business news context" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuxM0LBmhME8RSwhnBeYg0J0QZAcAmqklY5mmn5ICWMsD0_hELgLumxy4HVtrvfpKnfBIqvvH6OPfJrbwM3nCOgYVGE9LCVBJ0iHGcsp0RP-As5V2LsOJqcyrepXurc9ZgZSNxtb6lJGOZJaA8THhTEYaBz3dvYH_InBK5yVTaeoxB6mwnaQ6ZYD-5cafLs2cf3W-cyemnojaTR6B8p13oIITk-UGtig11sMGKhapqjlVwQQqpXr68aBBE">
+</div>
+<div class="p-4 pl-5 flex flex-col gap-3 flex-1">
+<div class="flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-secondary">
+<span class="text-accent-business">Business</span>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span>52m</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-[19px] leading-[1.3] text-on-surface mb-2">Federal Reserve holds rates steady, signals two cuts before year end</h2>
+</div>
+<div class="flex items-center justify-between mt-auto pt-2 border-t border-surface-variant/50">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-accent-business-bg text-accent-business flex items-center justify-center font-bold text-[11px]">
+                            CN
+                        </div>
+<span class="text-[13px] font-medium text-secondary">CNBC</span>
+</div>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+</button>
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- 6. SPORTS -->
+<article class="bg-white rounded-lg border border-[#E7E3DC] shadow-subtle overflow-hidden relative group hover:border-[#D6D1C7] hover:shadow-floating hover:-translate-y-[2px] transition-all duration-200">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-accent-sports"></div>
+<div class="p-4 pl-5 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-secondary">
+<span class="text-accent-sports">Sports</span>
+<span class="w-1 h-1 rounded-full bg-surface-variant"></span>
+<span>1h</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-[19px] leading-[1.3] text-on-surface mb-2">Klopp Germany squad drops two veterans ahead of qualifiers</h2>
+</div>
+<div class="flex items-center justify-between mt-auto pt-2 border-t border-surface-variant/50">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-accent-sports-bg text-accent-sports flex items-center justify-center font-bold text-[11px]">
+                            BB
+                        </div>
+<span class="text-[13px] font-medium text-secondary">BBC Sport</span>
+</div>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+</button>
+<button class="w-8 h-8 rounded-full text-secondary hover:bg-[#F4F2EE] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</main>
+<!-- BottomNavBar (Generated from JSON instructions) -->
+<nav class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center px-4 bg-background border-t border-surface-variant z-50 shadow-[0_-4px_16px_rgba(0,0,0,0.02)]">
+<!-- Feed (Active) -->
+<a class="flex flex-col items-center justify-center text-primary font-bold relative group" href="#">
+<div class="absolute -top-3 w-8 h-1 rounded-full bg-primary"></div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-1.5 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">newspaper</span>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-primary">Feed</span>
+</a>
+<!-- Search -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1.5 hover:text-primary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm mt-1">Search</span>
+</a>
+<!-- Saved -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1.5 hover:text-primary active:scale-90 transition-transform relative" href="#">
+<div class="absolute -top-1 right-2 w-4 h-4 bg-primary text-white rounded-full flex items-center justify-center text-[9px] font-bold z-10 border border-background">12</div>
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-label-sm text-label-sm mt-1">Saved</span>
+</a>
+<!-- Sources -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1.5 hover:text-primary active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">import_contacts</span>
+<span class="font-label-sm text-label-sm mt-1">Sources</span>
+</a>
+</nav>
+</body></html>

@@ -136,4 +136,51 @@
   --duration-fast: 180ms;
   --duration-medium: 260ms;
   --duration-slow: 400ms;
+
+  /* --- Animations ----------------------------------------------------------
+     Named here so components reference `animate-enter` rather than inlining
+     keyframes and magic durations. The reduced-motion block in base.css
+     neutralises all of them. */
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-enter: enter var(--duration-medium) var(--ease-standard) both;
+  --animate-fade-in: fade-in var(--duration-fast) var(--ease-standard);
+  --animate-slide-up: slide-up var(--duration-slow) var(--ease-standard);
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
 }
