@@ -1,0 +1,78 @@
+/* ---------------------------------------------------------------------------
+   Base layer — global defaults that every screen inherits.
+   Component styling belongs in components, not here.
+   --------------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    /* Premium scrolling: smooth anchor jumps, and sticky headers get clearance
+       so a scrolled-to heading is never hidden underneath them. */
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-body-md);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-headline);
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible focus is non-negotiable — WCAG 2.4.7. Keyboard only, so pointer
+     users never see a ring, but tab users always do. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: var(--radius-micro);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-tint);
+    color: var(--color-brand);
+  }
+
+  /* Images in this product are publisher-supplied and often missing. Anything
+     that does render should never overflow its container. */
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* Respect the user's motion preference. Motion is part of the experience, but
+   it is never load-bearing — every animation here degrades to an instant state
+   change without losing meaning. Framer/Motion reads this via useReducedMotion;
+   this rule covers CSS transitions and any component that misses it. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

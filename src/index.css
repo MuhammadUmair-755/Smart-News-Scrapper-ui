@@ -1,0 +1,5 @@
+/* Stylesheet entry point. Order matters: Tailwind first so @theme can extend
+   it, then our tokens, then the base layer that consumes them. */
+@import 'tailwindcss';
+@import './styles/tokens.css';
+@import './styles/base.css';
