@@ -21,6 +21,53 @@ function respondWith(body: unknown, status = 200) {
 
 afterEach(() => {
   vi.unstubAllGlobals()
+  vi.unstubAllEnvs()
+})
+
+/**
+ * BASE_URL and the tunnel headers are resolved once at module load, so each of
+ * these has to reset the module registry and re-import under a stubbed env.
+ */
+async function headersForBase(base: string): Promise<Record<string, string>> {
+  vi.resetModules()
+  vi.stubEnv('VITE_API_BASE_URL', base)
+
+  const fetchMock = vi.fn(
+    async () =>
+      new Response('[]', {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+  )
+  vi.stubGlobal('fetch', fetchMock)
+
+  const client = await import('./client')
+  await client.request('/categories/')
+
+  // The stub declares no parameters, so vitest infers an empty call tuple.
+  // Assert the shape `fetch` is actually invoked with.
+  const calls = fetchMock.mock.calls as unknown as Array<
+    [string, RequestInit | undefined]
+  >
+  return (calls[0]?.[1]?.headers ?? {}) as Record<string, string>
+}
+
+describe('ngrok interstitial bypass', () => {
+  it('sends ngrok-skip-browser-warning when the API base is an absolute origin', async () => {
+    // Without this header ngrok returns its ERR_NGROK_6024 warning page, which
+    // has no CORS headers, and the browser reports it as a CORS failure.
+    const headers = await headersForBase('https://example.ngrok-free.dev/api')
+
+    expect(headers['ngrok-skip-browser-warning']).toBe('true')
+    expect(headers.Accept).toBe('application/json')
+  })
+
+  it('omits it in same-origin proxy mode, where it would only force a preflight', async () => {
+    const headers = await headersForBase('/api')
+
+    expect(headers['ngrok-skip-browser-warning']).toBeUndefined()
+    expect(headers.Accept).toBe('application/json')
+  })
 })
 
 describe('toSearchParams', () => {
