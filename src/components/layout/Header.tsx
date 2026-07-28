@@ -2,7 +2,7 @@ import { Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 
-import { CategoryNav } from '@/components/layout/CategoryNav'
+// import { CategoryNav } from '@/components/layout/CategoryNav'
 import { SearchOverlay } from '@/components/layout/SearchOverlay'
 import { Input } from '@/components/ui/Input'
 import { cn } from '@/lib/cn'
