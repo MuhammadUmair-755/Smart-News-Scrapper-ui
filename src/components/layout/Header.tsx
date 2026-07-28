@@ -54,7 +54,7 @@ export function Header() {
               </span>
             </Link>
 
-            <CategoryNav />
+            {/* <CategoryNav /> */}
           </div>
 
           <div className="flex items-center gap-2">
