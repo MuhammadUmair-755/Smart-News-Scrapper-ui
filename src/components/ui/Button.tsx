@@ -9,6 +9,7 @@ const button = cva(
   [
     'inline-flex items-center justify-center gap-2 rounded-control font-body font-medium',
     'transition-all duration-(--duration-micro) ease-standard',
+    'cursor-pointer',
     'disabled:pointer-events-none disabled:opacity-50',
   ],
   {

@@ -1,5 +1,5 @@
 import { Search, SearchX } from 'lucide-react'
-import { useDeferredValue, useEffect, useState } from 'react'
+import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 
 import type { ArticleFeedQuery } from '@/api/types'
@@ -30,14 +30,24 @@ export default function SearchResults() {
   const urlQuery = searchParams.get('q') ?? ''
   const categorySlug = searchParams.get('category') ?? undefined
   const [draft, setDraft] = useState(urlQuery)
-
-  // Back/forward and shared links have to move the field, not just the results.
-  useEffect(() => setDraft(urlQuery), [urlQuery])
-
   const debounced = useDebounce(draft, 300)
 
+
+  const settled = useRef(urlQuery)
+
+  // Back/forward and in-app links have to move the field, not just the results.
   useEffect(() => {
-    if (debounced === urlQuery) return
+    if (urlQuery === settled.current) return
+    settled.current = urlQuery
+    setDraft(urlQuery)
+  }, [urlQuery])
+
+  // Typing wins, but only once it has stopped. Keyed on `debounced` alone —
+  // waking this effect on `urlQuery` is what let a stale keystroke overwrite a
+  // navigation that had already happened.
+  useEffect(() => {
+    if (debounced === settled.current) return
+    settled.current = debounced
 
     setSearchParams(
       (previous) => {
@@ -48,7 +58,7 @@ export default function SearchResults() {
       },
       { replace: true },
     )
-  }, [debounced, urlQuery, setSearchParams])
+  }, [debounced, setSearchParams])
 
   const term = useDeferredValue(urlQuery)
   const hasQuery = term.trim().length > 0

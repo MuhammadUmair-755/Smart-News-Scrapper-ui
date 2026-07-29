@@ -69,7 +69,7 @@ export function SearchOverlay({ open, onOpenChange }: SearchOverlayProps) {
                         type="button"
                         aria-label="Clear search"
                         onClick={() => setQuery('')}
-                        className="flex size-6 items-center justify-center rounded-full bg-hairline text-ink-secondary"
+                        className="flex size-6 cursor-pointer items-center justify-center rounded-full bg-hairline text-ink-secondary"
                       >
                         <X aria-hidden className="size-3.5" />
                       </button>
@@ -78,7 +78,7 @@ export function SearchOverlay({ open, onOpenChange }: SearchOverlayProps) {
                 : {})}
             />
 
-            <Dialog.Close className="shrink-0 px-2 py-2 text-body-sm font-medium text-brand">
+            <Dialog.Close className="shrink-0 cursor-pointer px-2 py-2 text-body-sm font-medium text-brand">
               Cancel
             </Dialog.Close>
           </form>

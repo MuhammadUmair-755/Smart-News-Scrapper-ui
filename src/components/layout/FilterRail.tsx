@@ -152,7 +152,7 @@ function RailRadio({
       aria-checked={checked}
       onClick={onSelect}
       className={cn(
-        'flex items-center gap-2.5 rounded-micro px-2 py-1.5 text-left text-body-sm',
+        'flex cursor-pointer items-center gap-2.5 rounded-micro px-2 py-1.5 text-left text-body-sm',
         'transition-colors duration-(--duration-fast) ease-standard',
         checked ? 'bg-brand-tint font-medium text-brand' : 'text-ink-secondary hover:bg-hairline/60 hover:text-ink',
       )}
